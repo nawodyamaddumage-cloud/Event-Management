@@ -567,7 +567,7 @@ if ($isLoggedIn) {
     <a href="index.php" class="active">Home</a>
     <a href="event.php">Browse Events</a>
     <?php if ($isLoggedIn): ?>
-    <a href="dashboard.php">My Dashboard</a>
+    <a href="dashboard.php">My Dashboard <span class="dashboard-counter" style="background-color: #ff9900; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; display: none;">0</span></a>
     <?php endif; ?>
   </div>
   <?php if ($isLoggedIn): ?>
@@ -772,6 +772,28 @@ if ($isLoggedIn) {
           }
       });
   });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function updateDashboardCounter() {
+        const addedEvents = JSON.parse(localStorage.getItem('addedEvents')) || [];
+        const counters = document.querySelectorAll('.dashboard-counter');
+        counters.forEach(counter => {
+            if (addedEvents.length > 0) {
+                counter.textContent = addedEvents.length;
+                counter.style.display = 'inline-block';
+            } else {
+                counter.style.display = 'none';
+            }
+        });
+    }
+    updateDashboardCounter();
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'addedEvents') {
+            updateDashboardCounter();
+        }
+    });
+});
 </script>
 </body>
 </html>

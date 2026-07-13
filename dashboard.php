@@ -453,7 +453,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
     <nav>
         <a href="index.php" id="home-tab">Home</a>
         <a href="#" onclick="showTab('browse')" id="browse-tab">Browse Events</a>
-        <a href="#" onclick="showTab('dashboard')" id="dashboard-tab" class="active">My Dashboard</a>
+        <a href="#" onclick="showTab('dashboard')" id="dashboard-tab" class="active">My Dashboard <span class="dashboard-counter" style="background-color: #ff9900; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; display: none;">0</span></a>
         <span class="welcome-msg" style="position: absolute; right: 140px; font-weight: bold; color: #ff9900; font-size: 0.95rem; top: 50%; transform: translateY(-50%);">Welcome, <?php echo $fullName; ?></span>
         <button class="login-btn" onclick="window.location.href='logout.php'">Logout</button>
     </nav>
@@ -931,6 +931,17 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
             const grid = document.getElementById('my-events-grid');
             const emptyState = document.getElementById('empty-state');
             
+            // Update counter in navbar
+            const counters = document.querySelectorAll('.dashboard-counter');
+            counters.forEach(counter => {
+                if (addedEvents.length > 0) {
+                    counter.textContent = addedEvents.length;
+                    counter.style.display = 'inline-block';
+                } else {
+                    counter.style.display = 'none';
+                }
+            });
+
             if (addedEvents.length === 0) {
                 grid.style.display = 'none';
                 emptyState.style.display = 'block';
