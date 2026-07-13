@@ -509,7 +509,7 @@ if ($isLoggedIn) {
               <span></span>
             </button>
             <div class="nav-links" id="navLinks">
-              <a href="index.php">HOME</a>
+              <a href="index.php">Home</a>
               <a href="event.php" class="active">Browse Events</a>
               <?php if ($isLoggedIn): ?>
               <a href="dashboard.php">My Dashboard</a>
@@ -581,7 +581,11 @@ if ($isLoggedIn) {
             </div>
             <div class="event-buttons">
               <a href="AI.php" class="view-btn" style="text-align:center; display:inline-block; text-decoration:none;">View Details</a>          
+              <?php if ($isLoggedIn): ?>
+              <button class="register-btn" onclick="addEvent(1)" id="add-btn-1" style="text-align:center; display:inline-block; text-decoration:none;">Add Event</button>
+              <?php else: ?>
               <a href="register.php" class="register-btn" style="text-align:center; display:inline-block; text-decoration:none;">Register</a>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -621,7 +625,11 @@ if ($isLoggedIn) {
             </div>
             <div class="event-buttons">
               <a href="Cultural.php" class="view-btn" style="text-align:center; display:inline-block; text-decoration:none;">View Details</a> 
+                <?php if ($isLoggedIn): ?>
+                <button class="register-btn" onclick="addEvent(2)" id="add-btn-2" style="text-align:center; display:inline-block; text-decoration:none;">Add Event</button>
+                <?php else: ?>
                 <a href="register.php" class="register-btn" style="text-align:center; display:inline-block; text-decoration:none;">Register</a>
+                <?php endif; ?>
             </div>
           </div>
         </div>
@@ -661,7 +669,11 @@ if ($isLoggedIn) {
             </div>
             <div class="event-buttons">
               <a href="volley.php" class="view-btn" style="text-align:center; display:inline-block; text-decoration:none;">View Details</a> 
+              <?php if ($isLoggedIn): ?>
+              <button class="register-btn" onclick="addEvent(3)" id="add-btn-3" style="text-align:center; display:inline-block; text-decoration:none;">Add Event</button>
+              <?php else: ?>
               <a href="register.php" class="register-btn" style="text-align:center; display:inline-block; text-decoration:none;">Register</a>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -701,7 +713,11 @@ if ($isLoggedIn) {
             </div>
             <div class="event-buttons">
               <a href="resume.php" class="view-btn" style="text-align:center; display:inline-block; text-decoration:none;">View Details</a> 
+              <?php if ($isLoggedIn): ?>
+              <button class="register-btn" onclick="addEvent(4)" id="add-btn-4" style="text-align:center; display:inline-block; text-decoration:none;">Add Event</button>
+              <?php else: ?>
               <a href="register.php" class="register-btn" style="text-align:center; display:inline-block; text-decoration:none;">Register</a>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -741,7 +757,11 @@ if ($isLoggedIn) {
             </div>
             <div class="event-buttons">
               <a href="program.php" class="view-btn" style="text-align:center; display:inline-block; text-decoration:none;">View Details</a> 
+              <?php if ($isLoggedIn): ?>
+              <button class="register-btn" onclick="addEvent(5)" id="add-btn-5" style="text-align:center; display:inline-block; text-decoration:none;">Add Event</button>
+              <?php else: ?>
               <a href="register.php" class="register-btn" style="text-align:center; display:inline-block; text-decoration:none;">Register</a>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -781,7 +801,11 @@ if ($isLoggedIn) {
             </div>
             <div class="event-buttons">
               <a href="music.php" class="view-btn" style="text-align:center; display:inline-block; text-decoration:none;">View Details</a> 
+               <?php if ($isLoggedIn): ?>
+               <button class="register-btn" onclick="addEvent(6)" id="add-btn-6" style="text-align:center; display:inline-block; text-decoration:none;">Add Event</button>
+               <?php else: ?>
                <a href="register.php" class="register-btn" style="text-align:center; display:inline-block; text-decoration:none;">Register</a>
+               <?php endif; ?>
             </div>
           </div>
         </div>
@@ -828,6 +852,47 @@ if ($isLoggedIn) {
             btn.classList.add("active");
           });
         });
+      });
+    </script>
+    <script>
+      const eventsData = [
+          { id: 1, title: "Advanced AI Workshop", category: "Tech Talks", date: "May 5, 2025", time: "2:00 PM", location: "Tech Building, Room 305", image: "images/AI-Workshop.jpg", detailPage: "AI.php" },
+          { id: 2, title: "Annual Cultural Festival", category: "Cultural", date: "May 12, 2025", time: "6:00 PM", location: "University Auditorium", image: "images/Cultural.jpg", detailPage: "Cultural.php" },
+          { id: 3, title: "Inter-College Volleyball", category: "Sports", date: "May 20, 2025", time: "10:00 AM", location: "University Sports Complex", image: "images/volleyball.jpg", detailPage: "volley.php" },
+          { id: 4, title: "Resume Building Workshop", category: "Workshops", date: "May 25, 2025", time: "1:00 PM", location: "Career Center, Room 102", image: "images/resume.jpg", detailPage: "resume.php" },
+          { id: 5, title: "Programming Hackathon", category: "Tech Talks", date: "June 2, 2025", time: "9:00 AM", location: "Computer Science Building, Lab 4", image: "images/program.jpg", detailPage: "program.php" },
+          { id: 6, title: "Music Concert", category: "Cultural", date: "June 10, 2025", time: "7:00 PM", location: "Outdoor Amphitheater", image: "images/concert.jpg", detailPage: "music.php" }
+      ];
+
+      function addEvent(eventId) {
+          let addedEvents = JSON.parse(localStorage.getItem('addedEvents')) || [];
+          const event = eventsData.find(e => e.id === eventId);
+          if (event && !addedEvents.some(e => e.id === eventId)) {
+              addedEvents.push(event);
+              localStorage.setItem('addedEvents', JSON.stringify(addedEvents));
+              
+              const btn = document.getElementById('add-btn-' + eventId);
+              if (btn) {
+                  btn.textContent = 'Added!';
+                  btn.style.background = 'linear-gradient(90deg, #00cc44, #00aa33)';
+                  btn.disabled = true;
+                  btn.style.opacity = '0.5';
+                  btn.style.cursor = 'not-allowed';
+              }
+          }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+          let addedEvents = JSON.parse(localStorage.getItem('addedEvents')) || [];
+          addedEvents.forEach(event => {
+              const btn = document.getElementById('add-btn-' + event.id);
+              if (btn) {
+                  btn.textContent = 'Added';
+                  btn.disabled = true;
+                  btn.style.opacity = '0.5';
+                  btn.style.cursor = 'not-allowed';
+              }
+          });
       });
     </script>
   </body>

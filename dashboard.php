@@ -451,7 +451,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
     </header>
 
     <nav>
-        <a href="index.php" id="home-tab">HOME</a>
+        <a href="index.php" id="home-tab">Home</a>
         <a href="#" onclick="showTab('browse')" id="browse-tab">Browse Events</a>
         <a href="#" onclick="showTab('dashboard')" id="dashboard-tab" class="active">My Dashboard</a>
         <span class="welcome-msg" style="position: absolute; right: 140px; font-weight: bold; color: #ff9900; font-size: 0.95rem; top: 50%; transform: translateY(-50%);">Welcome, <?php echo $fullName; ?></span>
@@ -798,7 +798,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
         ];
 
         // Store added events in memory
-        let addedEvents = [];
+        let addedEvents = JSON.parse(localStorage.getItem('addedEvents')) || [];
         let currentFilter = 'all';
 
         // Initialize the page
@@ -902,6 +902,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
             const event = eventsData.find(e => e.id === eventId);
             if (event && !addedEvents.some(e => e.id === eventId)) {
                 addedEvents.push(event);
+                localStorage.setItem('addedEvents', JSON.stringify(addedEvents));
                 renderBrowseEvents(); // Re-render to show "Added" state
                 updateDashboard();
                 
@@ -920,6 +921,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
         // Remove event from dashboard
         function removeEvent(eventId) {
             addedEvents = addedEvents.filter(e => e.id !== eventId);
+            localStorage.setItem('addedEvents', JSON.stringify(addedEvents));
             updateDashboard();
             renderBrowseEvents(); // Re-render browse events to remove "Added" badge
         }

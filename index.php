@@ -564,7 +564,7 @@ if ($isLoggedIn) {
     <span></span>
   </button>
   <div class="nav-links" id="navLinks">
-    <a href="index.php" class="active">HOME</a>
+    <a href="index.php" class="active">Home</a>
     <a href="event.php">Browse Events</a>
     <?php if ($isLoggedIn): ?>
     <a href="dashboard.php">My Dashboard</a>
