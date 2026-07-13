@@ -460,7 +460,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
 
     <div class="main-content">
         <div class="dashboard-header">
-            <h1 id="page-title">Student Dashboard</h1>
+            <h1 id="page-title">My Dashboard</h1>
             <div class="subtitle-text" id="page-subtitle">Manage your events and discover new opportunities</div>
         </div>
 
