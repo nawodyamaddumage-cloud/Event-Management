@@ -503,10 +503,11 @@ $isLoggedIn = isset($_SESSION['student_id']);
             <div class="nav-links" id="navLinks">
               <a href="index.php">HOME</a>
               <a href="event.php" class="active">EVENTS</a>
+              <?php if ($isLoggedIn): ?>
+              <a href="dashboard.php">DASHBOARD</a>
+              <?php endif; ?>
             </div>
-            <?php if ($isLoggedIn): ?>
-              <a href="dashboard.php"><button class="login-btn">DASHBOARD</button></a>
-            <?php else: ?>
+            <?php if (!$isLoggedIn): ?>
               <a href="login.php"><button class="login-btn">LOGIN</button></a>
             <?php endif; ?>
         </nav>

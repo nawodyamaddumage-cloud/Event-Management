@@ -452,8 +452,8 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
 
     <nav>
         <a href="index.php" id="home-tab">HOME</a>
-        <a href="#" onclick="showTab('browse')" id="browse-tab" class="active">Browse Events</a>
-        <a href="#" onclick="showTab('dashboard')" id="dashboard-tab">My Dashboard</a>
+        <a href="#" onclick="showTab('browse')" id="browse-tab">Browse Events</a>
+        <a href="#" onclick="showTab('dashboard')" id="dashboard-tab" class="active">My Dashboard</a>
         <span class="welcome-msg" style="position: absolute; right: 140px; font-weight: bold; color: #ff9900; font-size: 0.95rem; top: 50%; transform: translateY(-50%);">Welcome, <?php echo $fullName; ?></span>
         <button class="login-btn" onclick="window.location.href='logout.php'">Logout</button>
     </nav>
@@ -465,7 +465,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
         </div>
 
         <!-- Browse Events Tab -->
-        <div id="browse-content" class="tab-content active">
+        <div id="browse-content" class="tab-content">
             <div class="subtitle-text">CHECK OUT THE</div>
             <h1>EVENTS</h1>
             <div class="search-filter-container">
@@ -720,7 +720,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
         </div>
 
         <!-- My Dashboard Tab -->
-        <div id="dashboard-content" class="tab-content">
+        <div id="dashboard-content" class="tab-content active">
             <div id="my-events-grid" class="events-grid">
                 <!-- Added events will appear here -->
             </div>
