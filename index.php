@@ -1,6 +1,14 @@
 <?php
 session_start();
 $isLoggedIn = isset($_SESSION['student_id']);
+$fullName = 'Student';
+if ($isLoggedIn) {
+    require_once 'db_connect.php';
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE student_id = ?");
+    $stmt->execute([$_SESSION['student_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) : 'Student';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -562,7 +570,10 @@ $isLoggedIn = isset($_SESSION['student_id']);
     <a href="dashboard.php">My Dashboard</a>
     <?php endif; ?>
   </div>
-  <?php if (!$isLoggedIn): ?>
+  <?php if ($isLoggedIn): ?>
+    <span class="welcome-msg" style="position: absolute; right: 140px; font-weight: bold; color: #ff9900; font-size: 0.95rem; top: 50%; transform: translateY(-50%);">Welcome, <?php echo $fullName; ?></span>
+    <button class="login-btn" onclick="window.location.href='logout.php'">Logout</button>
+  <?php else: ?>
     <a href="login.php"><button class="login-btn">LOGIN</button></a>
   <?php endif; ?>
 </nav>
