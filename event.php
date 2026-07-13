@@ -502,9 +502,9 @@ $isLoggedIn = isset($_SESSION['student_id']);
             </button>
             <div class="nav-links" id="navLinks">
               <a href="index.php">HOME</a>
-              <a href="event.php" class="active">EVENTS</a>
+              <a href="event.php" class="active">Browse Events</a>
               <?php if ($isLoggedIn): ?>
-              <a href="dashboard.php">DASHBOARD</a>
+              <a href="dashboard.php">My Dashboard</a>
               <?php endif; ?>
             </div>
             <?php if (!$isLoggedIn): ?>
