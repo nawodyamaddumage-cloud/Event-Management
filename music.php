@@ -309,7 +309,7 @@
             </div>
         </div>
 
-        <div class="sponsors">
+        <!--<div class="sponsors">
             <h2>Event Sponsors</h2>
             <div class="sponsor-logos">
                 <div class="sponsor-logo"></div>
@@ -318,6 +318,6 @@
                 <div class="sponsor-logo"></div>
             </div>
         </div>
-    </div>
+    </div>-->
 </body>
 </html>

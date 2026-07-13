@@ -409,9 +409,15 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
             }
             
             nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding-bottom: 80px;
+                flex-direction: column;
+                align-items: center;
+                padding: 12px 0 70px 0;
+                gap: 6px;
+            }
+
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
             }
             
             .login-btn {
@@ -423,11 +429,13 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
             }
             
             .welcome-msg {
-                position: absolute;
-                bottom: 50px;
-                right: 50%;
-                transform: translateX(50%);
-                top: auto;
+                position: static !important;
+                transform: none !important;
+                text-align: center;
+                width: 100%;
+                font-size: 0.85rem !important;
+                right: auto !important;
+                top: auto !important;
             }
         }
     </style>
@@ -443,6 +451,7 @@ $fullName = $user ? htmlspecialchars($user['first_name'] . ' ' . $user['last_nam
     </header>
 
     <nav>
+        <a href="index.php" id="home-tab">HOME</a>
         <a href="#" onclick="showTab('browse')" id="browse-tab" class="active">Browse Events</a>
         <a href="#" onclick="showTab('dashboard')" id="dashboard-tab">My Dashboard</a>
         <span class="welcome-msg" style="position: absolute; right: 140px; font-weight: bold; color: #ff9900; font-size: 0.95rem; top: 50%; transform: translateY(-50%);">Welcome, <?php echo $fullName; ?></span>

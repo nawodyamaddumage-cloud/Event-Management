@@ -1,0 +1,26 @@
+How to test in Postman:
+
+Start the server if needed:
+http://localhost:8000
+Login:
+POST http://localhost:8000/login_process.php
+Header: Content-Type: application/json
+Body (raw JSON):
+{
+"student_id": "your_student_id",
+"password": "your_password"
+}
+Register:
+POST http://localhost:8000/register_process.php
+Header: Content-Type: application/json
+Body (raw JSON):
+{
+"first_name": "John",
+"last_name": "Doe",
+"email": "john@example.com",
+"student_id": "S12345",
+"department": "IT",
+"password": "123456",
+"confirm_password": "123456",
+"terms": true
+}

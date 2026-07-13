@@ -492,41 +492,27 @@
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
+                    <img src="images/fes 1.webp" alt="Festival Photo" class="gallery-image">
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
+                    <img src="images/fes 2.jpg" alt="Festival Photo" class="gallery-image">
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
+                    <img src="images/fes 3.webp" alt="Festival Photo" class="gallery-image">
                 </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/250/180" alt="Festival Photo" class="gallery-image">
-                </div>
+
             </div>
         </div>
         
         
-        <div class="sponsor-section">
+        <!--<div class="sponsor-section">
             <h3 class="section-heading">Event Sponsors</h3>
             
             <div class="sponsor-logos">
                 <img src="/api/placeholder/100/60" alt="Sponsor Logo" class="sponsor-logo">
                 <img src="/api/placeholder/100/60" alt="Sponsor Logo" class="sponsor-logo">
             </div>
-        </div>
+        </div>-->
     </div>
     
     <script>

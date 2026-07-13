@@ -501,14 +501,14 @@
         </div>
         
         
-        <div class="sponsor-section">
+        <!--<div class="sponsor-section">
             <h3 class="section-heading">Event Sponsors</h3>
             
             <div class="sponsor-logos">
                 <img src="/api/placeholder/100/60" alt="Sponsor Logo" class="sponsor-logo">
                 <img src="/api/placeholder/100/60" alt="Sponsor Logo" class="sponsor-logo">
             </div>
-        </div>
+        </div>-->
     </div>
     
     <script>

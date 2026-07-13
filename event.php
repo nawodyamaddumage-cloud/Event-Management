@@ -1,4 +1,14 @@
-<html>
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['student_id']);
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Events - University Event Management System</title>
+    </head>
     <body>
         <style>
         * {
@@ -36,15 +46,26 @@
           nav {
             display: flex;
             justify-content: center;
+            align-items: center;
             background-color: #1e0836;
-            padding: 15px 0;
+            padding: 15px 20px;
             position: relative;
+            flex-wrap: wrap;
+            gap: 5px;
+          }
+
+          .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
           }
           
           nav a {
             color: white;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 15px;
             font-weight: bold;
             font-size: 1rem;
             transition: color 0.3s;
@@ -57,10 +78,33 @@
           nav a.active {
             color: #ff9900;
           }
+
+          .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+
+          .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s;
+            display: block;
+          }
           
           .login-btn {
             position: absolute;
-            right: 30px;
+            right: 20px;
             background: linear-gradient(90deg, #ff9900, #ff5500);
             color: white;
             border: none;
@@ -70,6 +114,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            white-space: nowrap;
           }
           
           .login-btn:hover {
@@ -359,19 +404,84 @@
             .events-grid {
               grid-template-columns: 1fr;
             }
-            
+
             nav {
-              flex-wrap: wrap;
-              justify-content: center;
-              padding-bottom: 60px;
+              flex-direction: column;
+              align-items: center;
+              padding: 15px 60px;
+              gap: 0;
+            }
+
+            .hamburger {
+              display: flex;
+            }
+
+            .nav-links {
+              display: none;
+              flex-direction: column;
+              width: 100%;
+              align-items: center;
+              padding: 10px 0;
+              gap: 8px;
+              border-top: 1px solid rgba(255,255,255,0.1);
+              margin-top: 5px;
+            }
+
+            .nav-links.open {
+              display: flex;
+            }
+
+            .nav-links a {
+              margin: 0;
+              padding: 8px 0;
+              width: 100%;
+              text-align: center;
+              border-bottom: 1px solid rgba(255,255,255,0.05);
             }
             
             .login-btn {
               position: absolute;
-              bottom: 15px;
-              right: 50%;
-              transform: translateX(50%);
-              
+              right: 15px;
+              top: 50%;
+              transform: translateY(-50%);
+              padding: 6px 14px;
+              font-size: 0.8rem;
+            }
+
+            .main-content {
+              padding: 0 15px;
+            }
+
+            h1 {
+              font-size: 1.5rem;
+            }
+
+            .subtitle-text {
+              font-size: 1.3rem;
+              margin-bottom: 30px;
+            }
+
+            .footer-section {
+              min-width: 100%;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .events-grid {
+              grid-template-columns: 1fr;
+            }
+
+            .event-info {
+              flex-direction: column;
+              gap: 5px;
+            }
+
+            .event-buttons {
+              flex-direction: column;
+            }
+
+            .view-btn, .register-btn {
+              width: 100%;
             }
           }
         </style>
@@ -385,9 +495,20 @@
           </header>
 
         <nav>
-            <a href="login.php">
-                <button class="login-btn">LOGIN</button>
-              </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+              <a href="index.php">HOME</a>
+              <a href="event.php" class="active">EVENTS</a>
+            </div>
+            <?php if ($isLoggedIn): ?>
+              <a href="dashboard.php"><button class="login-btn">DASHBOARD</button></a>
+            <?php else: ?>
+              <a href="login.php"><button class="login-btn">LOGIN</button></a>
+            <?php endif; ?>
         </nav>
     
         <div class="main-content">
@@ -658,6 +779,7 @@
     
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // Search functionality
         const searchInput = document.querySelector(".search-box input");
         const eventCards = document.querySelectorAll(".event-card");
     
@@ -673,6 +795,25 @@
             } else {
               card.style.display = "none";
             }
+          });
+        });
+
+        // Hamburger menu toggle
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("navLinks");
+
+        if (hamburger && navLinks) {
+          hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("open");
+          });
+        }
+
+        // Category filter buttons
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        filterBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            filterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
           });
         });
       });

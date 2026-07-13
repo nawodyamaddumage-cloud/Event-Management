@@ -1,3 +1,7 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['student_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,9 +44,17 @@
     nav {
       display: flex;
       justify-content: center;
+      align-items: center;
       background-color: #1e0836;
-      padding: 15px 0;
+      padding: 15px 20px;
       position: relative;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     
     nav a {
@@ -60,6 +72,51 @@
     
     nav a.active {
       color: #ff9900;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 5px;
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s;
+      display: block;
+    }
+
+    .login-btn {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, #ff9900, #ff5500);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      white-space: nowrap;
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(90deg, #e68a00, #e04e00);
+      box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
     }
     
     .hero {
@@ -375,18 +432,108 @@
         }
 
         @media (max-width: 768px) {
-            .nav {
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+
+            header > div {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            nav {
                 flex-direction: column;
-                gap: 0.5rem;
+                align-items: center;
+                padding: 15px 60px;
+                gap: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                padding: 10px 0;
+                gap: 2px;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                margin-top: 5px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 0;
+                padding: 10px 0;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
             }
             
             .hero h2 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero {
+                height: 350px;
+            }
+            
+            .about {
+                padding: 2rem 5%;
+            }
+
+            .programs {
+                padding: 2rem 5%;
+            }
+
+            .program-cards {
+                grid-template-columns: 1fr;
             }
             
             .event-item {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .contact {
+                padding: 2rem 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            header > div img {
+                height: 35px !important;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .event-item {
+                gap: 1rem;
             }
         }
   </style>
@@ -403,10 +550,20 @@
   </header>
   
   <nav>
-  <a href="event.php">EVENTS</a>
-  <a href="#" class="active">HOME</a>
-  <a href="#">GALLERY</a>
-  <a href="#">CONTACT</a>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.php" class="active">HOME</a>
+    <a href="event.php">EVENTS</a>
+  </div>
+  <?php if ($isLoggedIn): ?>
+    <a href="dashboard.php"><button class="login-btn">DASHBOARD</button></a>
+  <?php else: ?>
+    <a href="login.php"><button class="login-btn">LOGIN</button></a>
+  <?php endif; ?>
 </nav>
   
   
@@ -559,18 +716,31 @@
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-              behavior: 'smooth'
-          });
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
           
           // Update active nav link
-          document.querySelectorAll('.nav a').forEach(link => {
+          document.querySelectorAll('.nav-links a').forEach(link => {
               link.classList.remove('active');
           });
           this.classList.add('active');
+
+          // Close mobile menu after clicking a link
+          document.getElementById('navLinks').classList.remove('open');
       });
   });
+
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+  }
 
   // Update active nav link on scroll
   window.addEventListener('scroll', function() {
@@ -581,7 +751,7 @@
           const sectionBottom = sectionTop + section.offsetHeight;
           
           if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-              document.querySelectorAll('.nav a').forEach(link => {
+              document.querySelectorAll('.nav-links a').forEach(link => {
                   link.classList.remove('active');
                   if (link.getAttribute('href') === '#' + section.getAttribute('id')) {
                       link.classList.add('active');
