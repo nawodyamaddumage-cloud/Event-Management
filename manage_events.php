@@ -99,7 +99,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select id="category" name="category" required>
+                            <select id="category" name="category" required style="color: #504e4e;">
                                 <option value="" <?php echo (empty($currentEdit['category']) ? 'selected' : ''); ?>>Select a Category</option>
                                 <option value="Workshops" <?php echo (($currentEdit['category'] ?? '') === 'Workshops' ? 'selected' : ''); ?>>Workshops</option>
                                 <option value="Cultural" <?php echo (($currentEdit['category'] ?? '') === 'Cultural' ? 'selected' : ''); ?>>Cultural</option>
