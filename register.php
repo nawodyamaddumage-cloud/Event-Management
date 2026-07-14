@@ -275,8 +275,8 @@ unset($_SESSION['errors']);
                 </div>
                 
                 <div class="form-group">
-                    <label for="student-id">Student ID (if available)</label>
-                    <input type="text" id="student-id" name="student_id" placeholder="Enter your student ID if you have one">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" name="student_id" placeholder="Enter your student ID" required>
                 </div>
                 
                 <div class="form-group">

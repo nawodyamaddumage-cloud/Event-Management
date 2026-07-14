@@ -232,7 +232,7 @@ unset($_SESSION['success']);
             <p class="text-red-500 text-center mb-4"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
 
-            <form method="POST" action="login_process.php">
+            <form method="POST" action="/Event-Management/login_process.php">
                 <div class="form-group">
                     <label for="student_id">Student ID</label>
                     <input type="text" id="student_id" name="student_id" placeholder="Enter your student ID" required>

@@ -61,25 +61,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ? OR student_id = ?");
-        $stmt->execute([$email, $student_id]);
+        if (empty($student_id)) {
+            $errors[] = "Student ID is required.";
+        }
 
-        if ($stmt->fetchColumn() > 0) {
-            if (is_json_request()) {
-                send_json([
-                    'success' => false,
-                    'message' => 'Email or student ID already exists.'
-                ], 409);
+        if (empty($errors)) {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ? OR student_id = ?");
+            $stmt->execute([$email, $student_id]);
+
+            if ($stmt->fetchColumn() > 0) {
+                if (is_json_request()) {
+                    send_json([
+                        'success' => false,
+                        'message' => 'Email or student ID already exists.'
+                    ], 409);
+                }
+
+                $_SESSION['errors'] = ["Email or student ID already exists."];
+                header("Location: register.php");
+                exit();
             }
-
-            $_SESSION['errors'] = ["Email or student ID already exists."];
-            header("Location: register.php");
-            exit();
         }
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("INSERT INTO users (student_id, first_name, last_name, email, department, password) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$student_id, $first_name, $last_name, $email, $department, $hashed_password]);
+        $stmt = $pdo->prepare("INSERT INTO users (student_id, first_name, last_name, email, department, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$student_id, $first_name, $last_name, $email, $department, $hashed_password, 'student']);
 
         if (is_json_request()) {
             send_json([

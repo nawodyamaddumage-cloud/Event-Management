@@ -1,0 +1,25 @@
+2026-07-14T15:11:21+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:11:21+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin"}
+2026-07-14T15:11:50+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@12"}
+2026-07-14T15:11:50+00:00 LOGIN FAIL: invalid credentials for admin
+2026-07-14T15:12:01+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@12"}
+2026-07-14T15:12:01+00:00 LOGIN FAIL: invalid credentials for admin
+2026-07-14T15:13:49+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@12"}
+2026-07-14T15:13:49+00:00 LOGIN FAIL: invalid credentials for admin
+2026-07-14T15:14:01+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:14:01+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin"}
+2026-07-14T15:14:07+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:14:07+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin"}
+2026-07-14T15:16:28+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:16:28+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin"}
+2026-07-14T15:17:43+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:17:43+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin"}
+2026-07-14T15:19:17+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:19:17+00:00 SESSION STARTED: {"session_id":"72uekoq0o86u987u37vm5tmjo7","session_name":"PHPSESSID","headers_sent":false}
+2026-07-14T15:19:17+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin","session_id":"naf7vcie91p7lnk2msjh7k7ade","headers_sent":false}
+2026-07-14T15:21:23+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:21:23+00:00 SESSION STARTED: {"session_id":"naf7vcie91p7lnk2msjh7k7ade","session_name":"PHPSESSID","headers_sent":false}
+2026-07-14T15:21:23+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin","session_id":"76d49scsgb6tv7pndldqpkl6st","headers_sent":false}
+2026-07-14T15:21:51+00:00 LOGIN POST: {"student_id":"admin","password":"Admin@123"}
+2026-07-14T15:21:51+00:00 SESSION STARTED: {"session_id":"fr3ers2tlgjqqr9thcfin9p7g7","session_name":"PHPSESSID","headers_sent":false}
+2026-07-14T15:21:51+00:00 LOGIN SUCCESS: {"student_id":"admin","role":"admin","session_id":"cl69k1vu1t2c1g6vvd67v3l655","headers_sent":false}
