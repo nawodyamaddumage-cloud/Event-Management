@@ -166,11 +166,11 @@ try {
                     <h3>Get in Touch</h3>
                     <div class="contact-item">
                         <strong>Address:</strong>&nbsp;
-                        <div>Akkara 111, Anula MW, Pandulagama, Anuradhapura, Sri Lanka</div>
+                        <div>New Town, Rathnapura, Sri Lanka</div>
                     </div>
                     <div class="contact-item">
                         <strong>Phone:</strong>&nbsp;
-                        <div>025-2234417</div>
+                        <div>045-2231492/ 045-2231493</div>
                     </div>
                     <div class="contact-item">
                         <strong>Office Hours:</strong>&nbsp;
