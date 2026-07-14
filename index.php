@@ -177,8 +177,7 @@ try {
                         <div>Monday - Friday: 8:30 AM - 4:30 PM</div>
                     </div>
                     <iframe class="map-frame"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.257692477762!2d80.3652263!3d8.3253079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afcf5d50f19537d%3A0x3d135827470d27bc!2sATI%20Anuradhapura!5e0!3m2!1sen!2slk!4v1680000000000!5m2!1sen!2slk"
-                        allowfullscreen="" loading="lazy">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.4966333072052!2d80.37734667499458!3d6.709079993286634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3bec5207d4d47%3A0x256c69dfa91d52be!2sAdvanced%20Technological%20Institute%20Ratnapura!5e0!3m2!1sen!2ssg!4v1784052116352!5m2!1sen!2ssg" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
                     </iframe>
                 </div>
                 <div class="contact-form">
