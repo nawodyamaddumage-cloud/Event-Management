@@ -3,9 +3,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'db_connect.php';
+$categoryFilter = $_GET['category'] ?? '';
+$allowedCategories = ['Workshops', 'Cultural', 'Sports', 'Tech Talks'];
+
 $events = [];
 try {
-    $stmt = $pdo->query('SELECT * FROM events ORDER BY event_date ASC, event_time ASC');
+    if (in_array($categoryFilter, $allowedCategories)) {
+        $stmt = $pdo->prepare('SELECT * FROM events WHERE category = ? ORDER BY event_date ASC, event_time ASC');
+        $stmt->execute([$categoryFilter]);
+    } else {
+        $categoryFilter = ''; // Reset if invalid
+        $placeholders = implode(',', array_fill(0, count($allowedCategories), '?'));
+        $stmt = $pdo->prepare("SELECT * FROM events WHERE category IN ($placeholders) ORDER BY event_date ASC, event_time ASC");
+        $stmt->execute($allowedCategories);
+    }
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $events = [];
@@ -26,6 +37,13 @@ try {
             <h1 style="font-size: 2.5rem; margin-bottom: 16px;">All Events</h1>
             <p style="color: #cfc0f2;">Browse all active event listings and learn more about each activity happening at SLIATE.</p>
         </section>
+
+        <div class="category-tabs" style="display: flex; gap: 10px; margin-bottom: 32px; flex-wrap: wrap;">
+            <a href="event.php" class="btn <?php echo empty($categoryFilter) ? 'btn-primary' : 'btn-secondary'; ?>">All Events</a>
+            <?php foreach ($allowedCategories as $cat): ?>
+                <a href="event.php?category=<?php echo urlencode($cat); ?>" class="btn <?php echo $categoryFilter === $cat ? 'btn-primary' : 'btn-secondary'; ?>"><?php echo htmlspecialchars($cat); ?></a>
+            <?php endforeach; ?>
+        </div>
 
         <?php if (empty($events)): ?>
             <p style="text-align:center; color:#d3c2ef;">No events have been created yet. Please check again later.</p>

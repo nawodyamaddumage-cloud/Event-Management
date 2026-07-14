@@ -108,7 +108,12 @@ $users = $userQuery->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <div class="form-group">
                         <label for="department">Department</label>
-                        <input type="text" id="department" name="department" value="<?php echo htmlspecialchars($_POST['department'] ?? ''); ?>" required>
+                        <select id="department" name="department" required>
+                            <option value="" <?php echo (empty($_POST['department']) ? 'selected' : ''); ?>>Select Department</option>
+                            <option value="hndit" <?php echo (($_POST['department'] ?? '') === 'hndit' ? 'selected' : ''); ?>>Higher National Diploma in Information Technology</option>
+                            <option value="hnda" <?php echo (($_POST['department'] ?? '') === 'hnda' ? 'selected' : ''); ?>>Higher National Diploma in Accountancy</option>
+                            <option value="hnde" <?php echo (($_POST['department'] ?? '') === 'hnde' ? 'selected' : ''); ?>>Higher National Diploma in English</option>
+                        </select>
                     </div>
                     <div class="grid grid-2">
                         <div class="form-group">

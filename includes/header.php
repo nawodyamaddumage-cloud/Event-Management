@@ -40,7 +40,10 @@ function navLink($href, $label, $currentPage) {
                 <span class="header-user">Welcome, <?php echo htmlspecialchars($user['first_name'] ?? 'User'); ?> (<?php echo htmlspecialchars($role); ?>)</span>
                 <button class="btn btn-secondary" onclick="window.location.href='logout.php'">Logout</button>
             <?php else: ?>
-                <a class="btn btn-primary" href="login.php">Login</a>
+                <div style="display: flex; gap: 10px;">
+                    <a class="btn btn-secondary" href="register.php">Register</a>
+                    <a class="btn btn-primary" href="login.php">Login</a>
+                </div>
             <?php endif; ?>
         </div>
     </div>
