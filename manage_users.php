@@ -143,7 +143,7 @@ $users = $userQuery->fetchAll(PDO::FETCH_ASSOC);
                 <?php if (empty($users)): ?>
                     <p>No user accounts found.</p>
                 <?php else: ?>
-                    <table class="table">
+                    <table class="table" style="overflow:scroll; display: block;">
                         <thead>
                             <tr>
                                 <th>Student ID</th>

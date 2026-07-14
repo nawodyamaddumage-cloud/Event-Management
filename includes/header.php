@@ -9,11 +9,42 @@ $loggedIn = is_array($user) && !empty($user);
 $role = $loggedIn ? ($user['role'] ?? 'guest') : 'guest';
 $currentPage = basename($_SERVER['SCRIPT_NAME']);
 
+// Get My Events count for students
+$myEventsCount = 0;
+if ($loggedIn && $role === 'student') {
+    global $pdo;
+    try {
+        $stmt = $pdo->prepare('SELECT COUNT(*) FROM student_events WHERE student_id = ?');
+        $stmt->execute([$_SESSION['student_id']]);
+        $myEventsCount = (int) $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        $myEventsCount = 0;
+    }
+}
+
 function navLink($href, $label, $currentPage) {
     $active = $currentPage === $href ? 'active' : '';
     return '<a class="nav-link ' . $active . '" href="' . htmlspecialchars($href) . '">' . htmlspecialchars($label) . '</a>';
 }
 ?>
+<style>
+    .badge-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-accent, #ff9900);
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        border-radius: 999px;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 5px;
+        margin-left: 5px;
+        line-height: 1;
+        vertical-align: middle;
+    }
+</style>
 <header class="site-header">
     <div class="container header-inner">
         <div class="site-branding">
@@ -25,7 +56,9 @@ function navLink($href, $label, $currentPage) {
             <?php echo navLink('index.php', 'Home', $currentPage); ?>
             <?php echo navLink('event.php', 'Events', $currentPage); ?>
             <?php if ($loggedIn): ?>
-                <?php echo navLink('dashboard.php', 'Dashboard', $currentPage); ?>
+                <a class="nav-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>" href="dashboard.php">
+                    Dashboard<?php if ($myEventsCount > 0): ?><span class="badge-count" id="my-events-badge"><?php echo $myEventsCount; ?></span><?php else: ?><span class="badge-count" id="my-events-badge" style="display:none;">0</span><?php endif; ?>
+                </a>
                 <?php if (can_manage_events()): ?>
                     <?php echo navLink('manage_events.php', 'Manage Events', $currentPage); ?>
                 <?php endif; ?>

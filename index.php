@@ -68,7 +68,7 @@ try {
 
         <section class="about" style="background: rgba(255,255,255,0.04); padding: 40px; border-radius: 24px;">
             <h2 class="section-title">Why Use This Portal?</h2>
-            <p style="max-width: 900px; margin: 0 auto; color: #d3c2ef; line-height: 1.8;">SLIATE Event Management makes
+            <p style="margin: 0 auto; color: #d3c2ef; line-height: 1.8;">SLIATE Event Management makes
                 it easy for students, organizers, and administrators to share important events, manage participation,
                 and keep campus activity information centralized. Create events, update details, and remove old listings
                 in one place.</p>
