@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $event_time = trim($_POST['event_time'] ?? '');
     $location = trim($_POST['location'] ?? '');
     $image = trim($_POST['image'] ?? '');
-    $detail_page = trim($_POST['detail_page'] ?? '');
+
 
     if ($action === 'create' || $action === 'update') {
         if (!$title || !$description || !$category || !$event_date || !$event_time || !$location) {
@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($errors)) {
             if ($action === 'create') {
-                $stmt = $pdo->prepare('INSERT INTO events (title, description, category, event_date, event_time, location, image, detail_page, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-                $stmt->execute([$title, $description, $category, $event_date, $event_time, $location, $image, $detail_page ?: null, $_SESSION['student_id']]);
+                $stmt = $pdo->prepare('INSERT INTO events (title, description, category, event_date, event_time, location, image, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+                $stmt->execute([$title, $description, $category, $event_date, $event_time, $location, $image, $_SESSION['student_id']]);
                 flash('success', 'Event created successfully.');
             } elseif ($action === 'update') {
                 $eventId = intval($_POST['event_id'] ?? 0);
-                $stmt = $pdo->prepare('UPDATE events SET title = ?, description = ?, category = ?, event_date = ?, event_time = ?, location = ?, image = ?, detail_page = ? WHERE id = ?');
-                $stmt->execute([$title, $description, $category, $event_date, $event_time, $location, $image, $detail_page ?: null, $eventId]);
+                $stmt = $pdo->prepare('UPDATE events SET title = ?, description = ?, category = ?, event_date = ?, event_time = ?, location = ?, image = ? WHERE id = ?');
+                $stmt->execute([$title, $description, $category, $event_date, $event_time, $location, $image, $eventId]);
                 flash('success', 'Event updated successfully.');
             }
             header('Location: manage_events.php');
@@ -124,10 +124,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <label for="image">Image URL</label>
                         <input type="text" id="image" name="image" value="<?php echo htmlspecialchars($currentEdit['image'] ?? ''); ?>" placeholder="Optional image path">
                     </div>
-                    <div class="form-group">
-                        <label for="detail_page">Detail Page URL</label>
-                        <input type="text" id="detail_page" name="detail_page" value="<?php echo htmlspecialchars($currentEdit['detail_page'] ?? ''); ?>" placeholder="Optional page for View Details">
-                    </div>
+
                     <button class="btn btn-primary" type="submit"><?php echo $currentEdit ? 'Update Event' : 'Create Event'; ?></button>
                 </form>
             </section>

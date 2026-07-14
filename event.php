@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -42,9 +42,7 @@ try {
                             <div><strong>Location:</strong> <?php echo htmlspecialchars($event['location']); ?></div>
                         </div>
                         <div style="display:flex; gap: 10px; flex-wrap: wrap;">
-                            <?php if (!empty($event['detail_page'])): ?>
-                                <a class="btn btn-secondary" href="<?php echo htmlspecialchars($event['detail_page']); ?>">View Details</a>
-                            <?php endif; ?>
+                            <a class="btn btn-secondary" href="event_details.php?id=<?php echo htmlspecialchars($event['id']); ?>">View Details</a>
                             <span class="badge">Created by <?php echo htmlspecialchars($event['created_by']); ?></span>
                         </div>
                     </article>

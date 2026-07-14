@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -44,7 +44,8 @@ try {
                         <article class="card event-card" style="padding: 20px;">
                             <h2 class="event-title"><?php echo htmlspecialchars($event['title']); ?></h2>
                             <p style="margin-bottom: 12px; color: #d3c2ef;">
-                                <?php echo htmlspecialchars(substr($event['description'], 0, 140)); ?>        <?php echo strlen($event['description']) > 140 ? '...' : ''; ?>
+                                <?php echo htmlspecialchars(substr($event['description'], 0, 140)); ?>
+                                <?php echo strlen($event['description']) > 140 ? '...' : ''; ?>
                             </p>
                             <div class="event-info"
                                 style="display:flex; gap: 16px; flex-wrap: wrap; color:#b9a4df; margin-bottom: 16px;">
@@ -53,14 +54,14 @@ try {
                                 <div><strong>Category:</strong> <?php echo htmlspecialchars($event['category']); ?></div>
                             </div>
                             <div style="display:flex; gap: 12px; flex-wrap: wrap;">
-                                <?php if (!empty($event['detail_page'])): ?>
-                                    <a class="btn btn-secondary" href="<?php echo htmlspecialchars($event['detail_page']); ?>">View
-                                        Details</a>
-                                <?php endif; ?>
-                                <a class="btn btn-primary" href="event.php">Browse All Events</a>
+                                <a class="btn btn-secondary"
+                                    href="event_details.php?id=<?php echo htmlspecialchars($event['id']); ?>">View Details</a>
                             </div>
                         </article>
                     <?php endforeach; ?>
+                </div>
+                <div style="text-align: center; margin-top: 32px;">
+                    <a class="btn btn-primary" href="event.php">Browse All Events</a>
                 </div>
             <?php endif; ?>
         </section>
@@ -72,53 +73,44 @@ try {
                 and keep campus activity information centralized. Create events, update details, and remove old listings
                 in one place.</p>
         </section>
-
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h2>PROGRAM</h2>
-                <p>Discover our innovative academic programs designed to prepare you for success in the rapidly evolving
-                    technological landscape of the 21st century.</p>
-            </div>
-
-        </section>
-
-        <section id="about" class="about">
-            <h2 class="section-title">ABOUT US</h2>
+        <section id="about" class="about section section--events">
+            <h2 class="section-title">About Us</h2>
             <div class="about-content">
                 <div class="about-text">
                     <h3>Excellence in Technological Education</h3>
                     <p>The Sri Lanka Institute of Advanced Technological Education (SLIATE) is a premier institution
                         dedicated to providing advanced technological education to meet the growing demands of the
                         industry and business sectors.</p>
-                    <p>Established under the Sri Lanka Institute of Advanced Technological Education Act No. 29 of 1995,
-                        we have been at the forefront of technological education in Sri Lanka for over two decades,
-                        offering Higher National Diplomas and other advanced technological courses.</p>
+                    <p>Established under the Sri Lanka Institute of Advanced Technological Education Act No. 29 of
+                        1995, we have been at the forefront of technological education in Sri Lanka for over two
+                        decades, offering Higher National Diplomas and other advanced technological courses.</p>
                     <p>Our mission is to produce globally competitive, technically proficient professionals equipped
-                        with both theoretical knowledge and practical skills necessary to excel in their chosen fields.
-                    </p>
-
+                        with both theoretical knowledge and practical skills necessary to excel in their chosen
+                        fields.</p>
                 </div>
                 <div class="about-image">
-                    <img src="images/atipic.jpg" alt="University Campus">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80"
+                        alt="University Campus">
                 </div>
             </div>
         </section>
 
-        <section id="programs" class="programs">
-            <h2 class="section-title">OUR COURSES</h2>
+        <section id="programs" class="programs section section--events">
+            <h2 class="section-title">Our Courses</h2>
             <div class="program-cards">
                 <div class="program-card">
-                    <img src="images/Eng.jpg" alt="English">
+                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80" alt="English">
                     <div class="program-details">
                         <h3>Higher National Diploma in English</h3>
-                        <p>A comprehensive program designed to enhance proficiency in English language and literature,
-                            focusing on communication skills, linguistics, and critical analysis. This program prepares
-                            students for careers in teaching, media, and other professional fields requiring advanced
-                            English skills.</p>
+                        <p>A comprehensive program designed to enhance proficiency in English language and
+                            literature, focusing on communication skills, linguistics, and critical analysis. This
+                            program prepares students for careers in teaching, media, and other professional fields
+                            requiring advanced English skills.</p>
                     </div>
                 </div>
                 <div class="program-card">
-                    <img src="images/It.jpg" alt="Information Technology">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"
+                        alt="Information Technology">
                     <div class="program-details">
                         <h3>Higher National Diploma in IT</h3>
                         <p>This program equips students with advanced knowledge in software development, networking,
@@ -128,22 +120,20 @@ try {
                     </div>
                 </div>
                 <div class="program-card">
-                    <img src="images/Acc.jpg" alt="Accountancy">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80" alt="Accountancy">
                     <div class="program-details">
                         <h3>Higher National Diploma in Accountancy</h3>
                         <p>This program provides a strong foundation in financial accounting, management accounting,
                             taxation, and auditing. It prepares students for careers in accounting, finance, and
-                            business management, with a focus on analytical and problem-solving skills essential for the
-                            corporate world.</p>
+                            business management, with a focus on analytical and problem-solving skills essential for
+                            the corporate world.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-
-
-        <section id="students" class="programs">
-            <h2 class="section-title">STUDENT LIFE</h2>
+        <section id="students" class="programs section section--events ">
+            <h2 class="section-title">Student Life</h2>
             <div class="program-cards">
                 <div class="program-card">
                     <div class="program-details">
@@ -155,8 +145,8 @@ try {
                 <div class="program-card">
                     <div class="program-details">
                         <h3>Campus Facilities</h3>
-                        <p>State-of-the-art laboratories, library resources, sports facilities, and recreational areas.
-                        </p>
+                        <p>State-of-the-art laboratories, library resources, sports facilities, and recreational
+                            areas.</p>
                     </div>
                 </div>
                 <div class="program-card">
@@ -169,33 +159,31 @@ try {
             </div>
         </section>
 
-        <section id="contact" class="contact">
-            <h2 class="section-title">CONTACT US</h2>
+        <section id="contact" class="contact section section--events">
+            <h2 class="section-title">Contact Us</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
                     <div class="contact-item">
                         <strong>Address:</strong>&nbsp;
-                        <div>Akkara 111,Anula MW,Pandulagama,Anuradhapura, Sri Lanka</div>
+                        <div>Akkara 111, Anula MW, Pandulagama, Anuradhapura, Sri Lanka</div>
                     </div>
                     <div class="contact-item">
                         <strong>Phone:</strong>&nbsp;
                         <div>025-2234417</div>
                     </div>
-
                     <div class="contact-item">
                         <strong>Office Hours:</strong>&nbsp;
                         <div>Monday - Friday: 8:30 AM - 4:30 PM</div>
                     </div>
-                    <iframe
+                    <iframe class="map-frame"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.257692477762!2d80.3652263!3d8.3253079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afcf5d50f19537d%3A0x3d135827470d27bc!2sATI%20Anuradhapura!5e0!3m2!1sen!2slk!4v1680000000000!5m2!1sen!2slk"
-                        width="100%" height="300" style="border:0; border-radius: 10px; margin-top: 20px;"
                         allowfullscreen="" loading="lazy">
                     </iframe>
                 </div>
                 <div class="contact-form">
                     <h3>Send us a Message</h3>
-                    <form>
+                    <form onsubmit="return false;">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
@@ -217,8 +205,10 @@ try {
                 </div>
             </div>
         </section>
+
     </main>
 </body>
+
 </html>
 
 
